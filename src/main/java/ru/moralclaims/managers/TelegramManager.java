@@ -165,15 +165,19 @@ public class TelegramManager {
                 long chatId = update.getMessage().getChatId();
                 
                 if (messageText.startsWith("/start")) {
-                    sendMessage(chatId, "Привет! Отправь код привязки из игры для подключения уведомлений.");
+                    String welcomeMessage = plugin.getLangManager().getMessage("telegram.bot.welcome");
+                    sendMessage(chatId, welcomeMessage);
                 } else if (messageText.matches("\\d{4}")) {
                     if (linkPlayer(messageText, chatId)) {
-                        sendMessage(chatId, "✅ Аккаунт успешно привязан! Теперь ты будешь получать уведомления о действиях в твоих приватах.");
+                        String successMessage = plugin.getLangManager().getMessage("telegram.bot.success");
+                        sendMessage(chatId, successMessage);
                     } else {
-                        sendMessage(chatId, "❌ Неверный код или код истек. Получи новый код в игре командой /telegram");
+                        String invalidCodeMessage = plugin.getLangManager().getMessage("telegram.bot.invalid_code");
+                        sendMessage(chatId, invalidCodeMessage);
                     }
                 } else {
-                    sendMessage(chatId, "Отправь 4-значный код привязки из игры.");
+                    String sendCodeMessage = plugin.getLangManager().getMessage("telegram.bot.send_code");
+                    sendMessage(chatId, sendCodeMessage);
                 }
             }
         }

@@ -33,7 +33,8 @@ public class ClaimProtectionListener implements Listener {
             plugin.getBorderVisualizationManager().showClaimBorder(player, claim);
             
             // Send notifications
-            plugin.getNotificationManager().addNotification(claim, player, "пытается строить", event.getBlock().getLocation());
+            String action = plugin.getLangManager().getMessage("notification.action.build");
+            plugin.getNotificationManager().addNotification(claim, player, action, event.getBlock().getLocation());
         }
     }
     
@@ -52,7 +53,8 @@ public class ClaimProtectionListener implements Listener {
             plugin.getBorderVisualizationManager().showClaimBorder(player, claim);
             
             // Send notifications
-            plugin.getNotificationManager().addNotification(claim, player, "пытается ломать блоки", event.getBlock().getLocation());
+            String action = plugin.getLangManager().getMessage("notification.action.break");
+            plugin.getNotificationManager().addNotification(claim, player, action, event.getBlock().getLocation());
         }
     }
     
@@ -79,7 +81,8 @@ public class ClaimProtectionListener implements Listener {
                 plugin.getBorderVisualizationManager().showClaimBorder(player, claim);
                 
                 // Send notifications
-                plugin.getNotificationManager().addNotification(claim, player, "пытается взаимодействовать с блоками", event.getClickedBlock().getLocation());
+                String action = plugin.getLangManager().getMessage("notification.action.interact");
+                plugin.getNotificationManager().addNotification(claim, player, action, event.getClickedBlock().getLocation());
             }
         }
     }

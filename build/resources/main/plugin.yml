@@ -1,5 +1,5 @@
 name: MoralClaims
-version: '1.0.0'
+version: '1.0.1'
 main: ru.moralclaims.MoralClaimsPlugin
 api-version: '1.16'
 author: bUmmy1337

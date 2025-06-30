@@ -74,7 +74,7 @@ public class ConfigManager {
     public String getRandomMessage(String type, String ownerName) {
         List<String> messages = getConfig().getStringList("messages." + type);
         if (messages.isEmpty()) {
-            return "§cЭто территория " + ownerName + "!";
+            return plugin.getLangManager().getMessage("protection.default_message", ownerName);
         }
         
         String message = messages.get(random.nextInt(messages.size()));

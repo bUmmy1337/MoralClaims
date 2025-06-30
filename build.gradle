@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'ru.catshade.moralclaims'
-version = '1.0.0'
+version = '1.0.1'
 description = 'Moral Claims Plugin for Paper 1.16-1.21.5 by bUmmy1337'
 
 java {

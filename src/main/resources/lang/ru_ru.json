@@ -56,5 +56,16 @@
   "telegram.confirm_repeat": "§7Повторите команду §f/telegram §7в течение 30 секунд для подтверждения",
   "telegram.confirm_warning": "§7Это действие отвяжет ваш Telegram аккаунт от игрового профиля",
   "telegram.confirm_expired": "§7Время подтверждения отвязки истекло",
-  "telegram.confirm_timeout": "§cВремя подтверждения истекло"
+  "telegram.confirm_timeout": "§cВремя подтверждения истекло",
+  "notification.action.build": "пытается строить",
+  "notification.action.break": "пытается ломать блоки",
+  "notification.action.interact": "пытается взаимодействовать с блоками",
+  "telegram.bot.welcome": "Привет! Отправь код привязки из игры для подключения уведомлений.",
+  "telegram.bot.success": "✅ Аккаунт успешно привязан! Теперь ты будешь получать уведомления о действиях в твоих приватах.",
+  "telegram.bot.invalid_code": "❌ Неверный код или код истек. Получи новый код в игре командой /telegram",
+  "telegram.bot.send_code": "Отправь 4-значный код привязки из игры.",
+  "notification.game.single": "§c⚠ %s %s в твоем привате %s",
+  "notification.game.multiple": "§c⚠ %s %s в твоем привате %s §7(x%d)",
+  "notification.telegram.header": "⚠️ Активность в ваших приватах:\n\n",
+  "protection.default_message": "§cЭто территория %s!"
 }

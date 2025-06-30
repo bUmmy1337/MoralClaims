@@ -56,5 +56,16 @@
   "telegram.confirm_repeat": "§7Repeat the command §f/telegram §7within 30 seconds to confirm",
   "telegram.confirm_warning": "§7This action will unlink your Telegram account from your game profile",
   "telegram.confirm_expired": "§7Confirmation time expired",
-  "telegram.confirm_timeout": "§cConfirmation time expired"
+  "telegram.confirm_timeout": "§cConfirmation time expired",
+  "notification.action.build": "is trying to build",
+  "notification.action.break": "is trying to break blocks",
+  "notification.action.interact": "is trying to interact with blocks",
+  "telegram.bot.welcome": "Hello! Send the linking code from the game to connect notifications.",
+  "telegram.bot.success": "✅ Account successfully linked! You will now receive notifications about actions in your claims.",
+  "telegram.bot.invalid_code": "❌ Invalid code or code expired. Get a new code in game with /telegram command",
+  "telegram.bot.send_code": "Send the 4-digit linking code from the game.",
+  "notification.game.single": "§c⚠ %s %s in your claim %s",
+  "notification.game.multiple": "§c⚠ %s %s in your claim %s §7(x%d)",
+  "notification.telegram.header": "⚠️ Activity in your claims:\n\n",
+  "protection.default_message": "§cThis is %s's territory!"
 }
