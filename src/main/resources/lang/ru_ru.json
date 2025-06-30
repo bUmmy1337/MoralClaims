@@ -3,7 +3,7 @@
   "claim.tool_instructions_header": "§6=== Как создать инструмент привата ===",
   "claim.tool_instructions_1": "§71. Возьми в руки §f%s",
   "claim.tool_instructions_2": "§72. Подойди к наковальне",
-  "claim.tool_instructions_3": "§73. Переименуй предмет в §f\"Инструмент привата\"",
+  "claim.tool_instructions_3": "§73. Переименуй предмет в §f\"%s\"",
   "claim.tool_instructions_success": "§aГотово! Теперь у тебя есть инструмент для выделения территории.",
   "claim.tool_instructions_usage": "§7Левый клик - первая точка, правый клик - вторая точка.",
   "claim.no_selection": "§cСначала выдели территорию! Используй /claimtool для инструкции.",

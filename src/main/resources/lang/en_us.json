@@ -3,7 +3,7 @@
   "claim.tool_instructions_header": "§6=== How to create a selection tool ===",
   "claim.tool_instructions_1": "§71. Hold a §f%s",
   "claim.tool_instructions_2": "§72. Go to an anvil",
-  "claim.tool_instructions_3": "§73. Rename the item to §f\"Claim Tool\"",
+  "claim.tool_instructions_3": "§73. Rename the item to §f\"%s\"",
   "claim.tool_instructions_success": "§aDone! You now have a selection tool.",
   "claim.tool_instructions_usage": "§7Left-click for the first point, right-click for the second.",
   "claim.no_selection": "§cYou must make a selection first! Use /claimtool for instructions.",

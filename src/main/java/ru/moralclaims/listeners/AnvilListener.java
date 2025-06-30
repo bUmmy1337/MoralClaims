@@ -15,7 +15,6 @@ import java.util.Arrays;
 
 public class AnvilListener implements Listener {
     private final MoralClaimsPlugin plugin;
-    private static final String SELECTION_TOOL_NAME = ""; // Will be loaded from lang file
     
     public AnvilListener(MoralClaimsPlugin plugin) {
         this.plugin = plugin;
@@ -38,8 +37,9 @@ public class AnvilListener implements Listener {
         }
         
         String renameText = inventory.getRenameText();
-        String selectionToolName = plugin.getLangManager().getMessage("anvil.tool_name");
-        if (renameText == null || !renameText.equals(selectionToolName)) {
+        String toolNameKey = plugin.getConfig().getString("selection.tool_name_key", "anvil.tool_name");
+        String toolName = plugin.getLangManager().getMessage(toolNameKey);
+        if (renameText == null || !renameText.equals(toolName)) {
             return;
         }
         

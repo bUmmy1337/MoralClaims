@@ -27,10 +27,12 @@ public class ClaimToolCommand implements CommandExecutor {
     
     private void sendToolInstructions(Player player) {
         String toolName = getSelectionToolName();
+        String toolNameKey = plugin.getConfig().getString("selection.tool_name_key", "anvil.tool_name");
+        String configToolName = plugin.getLangManager().getMessage(toolNameKey);
         player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_header"));
         player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_1", toolName));
         player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_2"));
-        player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_3"));
+        player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_3", configToolName));
         player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_success"));
         player.sendMessage(plugin.getLangManager().getMessage("claim.tool_instructions_usage"));
     }
