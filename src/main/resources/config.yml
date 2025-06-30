@@ -1,0 +1,60 @@
+# MoralClaims Configuration
+
+# Telegram Bot Settings
+telegram:
+  enabled: true
+  bot_token: "YOUR_BOT_TOKEN_HERE"
+  bot_username: "YourBotUsername"
+
+# Claim Settings
+claims:
+  max_claims_per_player: 5
+  max_claim_area: 2500      # Максимальная площадь привата (блоков)
+  min_claim_area: 25        # Минимальная площадь привата (блоков)
+  max_claim_width: 100      # Максимальная ширина привата
+  max_claim_length: 100     # Максимальная длина привата
+
+# Selection Tool Settings
+selection:
+  tool_name: "Инструмент привата"
+  show_particles: true
+  particle_interval: 20     # Интервал показа частиц (тики)
+
+# Hologram Settings
+holograms:
+  enabled: true
+  height_offset: 2.0
+  duration_seconds: 10
+  
+# Messages
+messages:
+  build_denied:
+    - "§c{owner} не разрешает тут строить!"
+    - "§c{owner} говорит: стройся в другом месте!"
+    - "§cЭто территория {owner}, найди свое место!"
+    - "§c{owner} не одобряет твоих действий здесь!"
+  
+  break_denied:
+    - "§c{owner} защищает эти блоки!"
+    - "§cНе ломай то, что принадлежит {owner}!"
+    - "§c{owner} не позволит тебе это сломать!"
+    - "§cТерритория {owner} под защитой!"
+  
+  interact_denied:
+    - "§c{owner} не разрешает тут взаимодействовать!"
+    - "§cЭто принадлежит {owner}, руки прочь!"
+    - "§c{owner} говорит: не трогай!"
+    - "§cТерритория {owner}, не лезь!"
+
+# Notification Settings
+notifications:
+  server_broadcast: true
+  telegram_notifications: true
+  log_actions: true
+  group_delay_seconds: 3    # Задержка перед отправкой сгруппированных уведомлений
+
+# Border Visualization Settings
+border_visualization:
+  enabled: true
+  duration_seconds: 10      # Длительность показа границ
+  particle_interval_ticks: 10  # Интервал между показом частиц (тики)

@@ -1,0 +1,66 @@
+name: MoralClaims
+version: '1.0.0'
+main: ru.moralclaims.MoralClaimsPlugin
+api-version: '1.21'
+author: bUmmy1337
+description: Moral Claims Plugin with Telegram notifications
+website: https://catshade.ru
+
+commands:
+  claim:
+    description: Create a moral claim from selection
+    usage: /claim
+    permission: moralclaims.claim
+  unclaim:
+    description: Remove a moral claim
+    usage: /unclaim
+    permission: moralclaims.unclaim
+  claimlist:
+    description: List your claims
+    usage: /claimlist
+    permission: moralclaims.list
+  claimtrust:
+    description: Add player to claim
+    usage: /claimtrust <player>
+    permission: moralclaims.trust
+  claimuntrust:
+    description: Remove player from claim
+    usage: /claimuntrust <player>
+    permission: moralclaims.trust
+  clearselection:
+    description: Clear current selection
+    usage: /clearselection
+    permission: moralclaims.claim
+  telegram:
+    description: Link or unlink Telegram account
+    usage: /telegram
+    permission: moralclaims.telegram
+
+permissions:
+  moralclaims.*:
+    description: All MoralClaims permissions
+    children:
+      moralclaims.claim: true
+      moralclaims.unclaim: true
+      moralclaims.list: true
+      moralclaims.trust: true
+      moralclaims.telegram: true
+      moralclaims.admin: true
+  moralclaims.claim:
+    description: Allow creating claims
+    default: true
+  moralclaims.unclaim:
+    description: Allow removing claims
+    default: true
+  moralclaims.list:
+    description: Allow listing claims
+    default: true
+  moralclaims.trust:
+    description: Allow managing trusted players
+    default: true
+  moralclaims.telegram:
+    description: Allow linking Telegram
+    default: true
+  moralclaims.admin:
+    description: Admin permissions
+    default: op

@@ -1,0 +1,96 @@
+plugins {
+    id 'java'
+}
+
+group = 'ru.catshade.moralclaims'
+version = '1.0.0'
+description = 'Moral Claims Plugin for Paper 1.21.4 by bUmmy1337'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc-repo'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+    maven {
+        name = 'jitpack'
+        url = 'https://jitpack.io'
+    }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+    
+    // Telegram dependencies - будут включен�� в JAR
+    implementation 'org.telegram:telegrambots:6.8.0'
+    implementation 'org.telegram:telegrambots-meta:6.8.0'
+    
+    // Jackson for JSON processing
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.15.2'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release.set(21)
+    options.compilerArgs.addAll(['-Xlint:deprecation', '-Xlint:unchecked'])
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+jar {
+    archiveFileName = "${project.name}-${project.version}.jar"
+    
+    // Include dependencies in JAR
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    
+    // Exclude unnecessary files
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/LICENSE*'
+    exclude 'META-INF/NOTICE*'
+    exclude 'META-INF/maven/**'
+    exclude 'META-INF/versions/**'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+    
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+// Task to copy the built jar to a plugins folder for testing
+task copyToPlugins(type: Copy) {
+    dependsOn jar
+    from jar.archiveFile
+    into file('plugins')
+}
+
+// Clean task enhancement
+clean {
+    delete 'plugins'
+}
+
+// Wrapper task configuration
+wrapper {
+    gradleVersion = '8.10.2'
+    distributionType = Wrapper.DistributionType.BIN
+}
