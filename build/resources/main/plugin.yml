@@ -1,10 +1,10 @@
 name: MoralClaims
 version: '1.0.0'
 main: ru.moralclaims.MoralClaimsPlugin
-api-version: '1.21'
+api-version: '1.16'
 author: bUmmy1337
 description: Moral Claims Plugin with Telegram notifications
-website: https://catshade.ru
+website: https://modrinth.com/project/moral-claims
 
 commands:
   claim:
@@ -31,6 +31,10 @@ commands:
     description: Clear current selection
     usage: /clearselection
     permission: moralclaims.claim
+  claimtool:
+    description: Show how to create a selection tool
+    usage: /claimtool
+    permission: moralclaims.tool
   telegram:
     description: Link or unlink Telegram account
     usage: /telegram
@@ -45,6 +49,7 @@ permissions:
       moralclaims.list: true
       moralclaims.trust: true
       moralclaims.telegram: true
+      moralclaims.tool: true
       moralclaims.admin: true
   moralclaims.claim:
     description: Allow creating claims
@@ -60,6 +65,9 @@ permissions:
     default: true
   moralclaims.telegram:
     description: Allow linking Telegram
+    default: true
+  moralclaims.tool:
+    description: Allow viewing tool instructions
     default: true
   moralclaims.admin:
     description: Admin permissions

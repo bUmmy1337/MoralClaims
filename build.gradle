@@ -4,16 +4,20 @@ plugins {
 
 group = 'ru.catshade.moralclaims'
 version = '1.0.0'
-description = 'Moral Claims Plugin for Paper 1.21.4 by bUmmy1337'
+description = 'Moral Claims Plugin for Paper 1.16-1.21.5 by bUmmy1337'
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
     mavenCentral()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
     maven {
         name = 'papermc-repo'
         url = 'https://repo.papermc.io/repository/maven-public/'
@@ -29,7 +33,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT'
+    // Используем Spigot API для лучшей совместимости
+    compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
     
     // Telegram dependencies - будут включен�� в JAR
     implementation 'org.telegram:telegrambots:6.8.0'
@@ -43,7 +48,7 @@ dependencies {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-    options.release.set(21)
+    options.release.set(8)
     options.compilerArgs.addAll(['-Xlint:deprecation', '-Xlint:unchecked'])
 }
 

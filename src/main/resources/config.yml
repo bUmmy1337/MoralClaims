@@ -1,5 +1,9 @@
 # MoralClaims Configuration
 
+# Locale setting (e.g., en_us, ru_ru)
+# You can edit the language files in the lang/ folder
+locale: en_us
+
 # Telegram Bot Settings
 telegram:
   enabled: true

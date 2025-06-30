@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.moralclaims.MoralClaimsPlugin;
+import ru.moralclaims.version.MaterialAdapter;
 
 public class SelectionListener implements Listener {
     private final MoralClaimsPlugin plugin;
@@ -45,7 +46,9 @@ public class SelectionListener implements Listener {
     }
     
     private boolean isSelectionTool(ItemStack item) {
-        if (item == null || item.getType() != Material.BRUSH) {
+        MaterialAdapter materialAdapter = plugin.getMaterialAdapter();
+        
+        if (item == null || item.getType() != materialAdapter.getSelectionTool()) {
             return false;
         }
         

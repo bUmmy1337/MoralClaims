@@ -30,15 +30,15 @@ public class ConfirmationManager {
         
         pendingConfirmations.put(playerId, confirmation);
         
-        player.sendMessage("§c⚠ Подтверждение отвязки Telegram");
-        player.sendMessage("§7Повторите команду §f/telegram §7в течение 30 секунд для подтверждения");
-        player.sendMessage("§7Это действие отвяжет ваш Telegram аккаунт от игрового профиля");
+        player.sendMessage(plugin.getLangManager().getMessage("telegram.confirm_unlink"));
+        player.sendMessage(plugin.getLangManager().getMessage("telegram.confirm_repeat"));
+        player.sendMessage(plugin.getLangManager().getMessage("telegram.confirm_warning"));
         
         // Автоматически удаляем подтверждение через 30 секунд
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if (removePendingConfirmation(playerId)) {
                 if (player.isOnline()) {
-                    player.sendMessage("§7Время подтверждения отвязки истекло");
+                    player.sendMessage(plugin.getLangManager().getMessage("telegram.confirm_expired"));
                 }
             }
         }, 600L); // 30 секунд = 600 тиков
@@ -58,7 +58,7 @@ public class ConfirmationManager {
         
         if (System.currentTimeMillis() > confirmation.expiresAt) {
             removePendingConfirmation(playerId);
-            player.sendMessage("§cВремя подтверждения истекло");
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.confirm_timeout"));
             return false;
         }
         

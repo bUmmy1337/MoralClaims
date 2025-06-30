@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 import ru.moralclaims.MoralClaimsPlugin;
 import ru.moralclaims.models.Claim;
+import ru.moralclaims.version.ParticleAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -124,27 +125,17 @@ public class BorderVisualizationManager {
     }
     
     private void showBorderParticles(Player player, List<Location> borderPoints) {
+        ParticleAdapter particleAdapter = plugin.getParticleAdapter();
+        
         for (Location point : borderPoints) {
             // Проверяем, что игрок достаточно близко для отображения частиц
             if (player.getLocation().distance(point) <= 64) {
                 // Показываем красные частицы
-                player.spawnParticle(
-                    Particle.DUST, 
-                    point, 
-                    1, 
-                    0, 0, 0, 0,
-                    new Particle.DustOptions(org.bukkit.Color.RED, 1.0f)
-                );
+                particleAdapter.spawnBorderParticle(player, point, 1.0f);
                 
                 // Добавляем дополнительные частицы для лучшей видимости
                 Location upperPoint = point.clone().add(0, 0.5, 0);
-                player.spawnParticle(
-                    Particle.DUST, 
-                    upperPoint, 
-                    1, 
-                    0, 0, 0, 0,
-                    new Particle.DustOptions(org.bukkit.Color.RED, 0.8f)
-                );
+                particleAdapter.spawnBorderParticle(player, upperPoint, 0.8f);
             }
         }
     }

@@ -16,17 +16,17 @@ public class TelegramCommand implements CommandExecutor {
     
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("§cЭта команда только для игроков!");
-            return true;
-        }
-        
-        Player player = (Player) sender;
-        
-        if (!plugin.getConfigManager().isTelegramEnabled()) {
-            player.sendMessage("§cTelegram уведомления отключены!");
-            return true;
-        }
+    if (!(sender instanceof Player)) {
+    sender.sendMessage(plugin.getLangManager().getMessage("error.no_player"));
+    return true;
+    }
+    
+    Player player = (Player) sender;
+    
+    if (!plugin.getConfigManager().isTelegramEnabled()) {
+    player.sendMessage(plugin.getLangManager().getMessage("telegram.disabled"));
+    return true;
+    }
         
         // Проверяем, привязан ли уже аккаунт
         if (plugin.getTelegramManager().isPlayerLinked(player.getUniqueId())) {
@@ -42,10 +42,10 @@ public class TelegramCommand implements CommandExecutor {
             // Подтверждаем отвязку
             if (plugin.getConfirmationManager().confirmTelegramUnlink(player)) {
                 if (plugin.getTelegramManager().unlinkPlayer(player.getUniqueId())) {
-                    player.sendMessage("§a✓ Telegram аккаунт успешно отвязан!");
-                    player.sendMessage("§7Уведомления больше не будут приходить в Telegram");
+                    player.sendMessage(plugin.getLangManager().getMessage("telegram.unlink_success"));
+                    player.sendMessage(plugin.getLangManager().getMessage("telegram.unlink_info"));
                 } else {
-                    player.sendMessage("§cОшибка при отвязке аккаунта");
+                    player.sendMessage(plugin.getLangManager().getMessage("telegram.unlink_error"));
                 }
             }
         } else {
@@ -60,13 +60,13 @@ public class TelegramCommand implements CommandExecutor {
         if (args.length == 0) {
             // Generate new code
             String code = plugin.getTelegramManager().generateLinkCode(player);
-            player.sendMessage("§6=== Привязка Telegram ===");
-            player.sendMessage("§71. Найди бота: §f@" + plugin.getConfigManager().getTelegramBotUsername());
-            player.sendMessage("§72. Отправь боту команду: §f/start");
-            player.sendMessage("§73. Отправь боту этот код: §a" + code);
-            player.sendMessage("§7Код действует 5 минут");
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.link_header"));
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.link_step1", plugin.getConfigManager().getTelegramBotUsername()));
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.link_step2"));
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.link_step3", code));
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.link_code_expires"));
         } else {
-            player.sendMessage("§cИспользуй: /telegram");
+            player.sendMessage(plugin.getLangManager().getMessage("telegram.usage"));
         }
         
         return true;

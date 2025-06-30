@@ -105,7 +105,7 @@ public class NotificationManager {
             return String.format("§c⚠ %s %s в твоем привате %s", 
                     group.getIntruderName(), group.getAction(), locationStr);
         } else {
-            return String.format("§c⚠ %s %s в твоем прива��е %s §7(x%d)", 
+            return String.format("§c⚠ %s %s в твоем привате %s §7(x%d)", 
                     group.getIntruderName(), group.getAction(), locationStr, group.getCount());
         }
     }

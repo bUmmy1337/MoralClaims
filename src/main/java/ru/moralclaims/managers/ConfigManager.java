@@ -110,4 +110,9 @@ public class ConfigManager {
     public int getBorderVisualizationInterval() {
         return getConfig().getInt("border_visualization.particle_interval_ticks", 10);
     }
+
+    // Locale setting
+    public String getLocale() {
+        return getConfig().getString("locale", "en_us");
+    }
 }
