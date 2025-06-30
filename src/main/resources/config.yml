@@ -1,5 +1,9 @@
 # MoralClaims Configuration
 
+# Locale setting (e.g., en_us, ru_ru)
+# You can edit the language files in the lang/ folder
+locale: en_us
+
 # Telegram Bot Settings
 telegram:
   enabled: true
@@ -9,16 +13,16 @@ telegram:
 # Claim Settings
 claims:
   max_claims_per_player: 5
-  max_claim_area: 2500      # Максимальная площадь привата (блоков)
-  min_claim_area: 25        # Минимальная площадь привата (блоков)
-  max_claim_width: 100      # Максимальная ширина привата
-  max_claim_length: 100     # Максимальная длина привата
+  max_claim_area: 2500      # Maximum claim area (blocks)
+  min_claim_area: 25        # Minimum claim area (blocks)
+  max_claim_width: 100      # Maximum claim width
+  max_claim_length: 100     # Maximum claim length
 
 # Selection Tool Settings
 selection:
-  tool_name: "Инструмент привата"
+  tool_name_key: "anvil.tool_name"  # Language key for tool name
   show_particles: true
-  particle_interval: 20     # Интервал показа частиц (тики)
+  particle_interval: 20     # Particle display interval (ticks)
 
 # Hologram Settings
 holograms:
@@ -29,22 +33,22 @@ holograms:
 # Messages
 messages:
   build_denied:
-    - "§c{owner} не разрешает тут строить!"
-    - "§c{owner} говорит: стройся в другом месте!"
-    - "§cЭто территория {owner}, найди свое место!"
-    - "§c{owner} не одобряет твоих действий здесь!"
+    - "§c{owner} doesn't allow building here!"
+    - "§c{owner} says: build somewhere else!"
+    - "§cThis is {owner}'s territory, find your own place!"
+    - "§c{owner} doesn't approve of your actions here!"
   
   break_denied:
-    - "§c{owner} защищает эти блоки!"
-    - "§cНе ломай то, что принадлежит {owner}!"
-    - "§c{owner} не позволит тебе это сломать!"
-    - "§cТерритория {owner} под защитой!"
+    - "§c{owner} protects these blocks!"
+    - "§cDon't break what belongs to {owner}!"
+    - "§c{owner} won't let you break this!"
+    - "§c{owner}'s territory is protected!"
   
   interact_denied:
-    - "§c{owner} не разрешает тут взаимодействовать!"
-    - "§cЭто принадлежит {owner}, руки прочь!"
-    - "§c{owner} говорит: не трогай!"
-    - "§cТерритория {owner}, не лезь!"
+    - "§c{owner} doesn't allow interaction here!"
+    - "§cThis belongs to {owner}, hands off!"
+    - "§c{owner} says: don't touch!"
+    - "§c{owner}'s territory, stay away!"
 
 # Notification Settings
 notifications:

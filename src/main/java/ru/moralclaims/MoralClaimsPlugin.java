@@ -1,8 +1,10 @@
 package ru.moralclaims;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import ru.moralclaims.commands.ClaimCommand;
+import ru.moralclaims.commands.FinalClaimCommand;
+import ru.moralclaims.commands.ClaimToolCommand;
 import ru.moralclaims.commands.TelegramCommand;
+import ru.moralclaims.listeners.AnvilListener;
 import ru.moralclaims.listeners.ClaimProtectionListener;
 import ru.moralclaims.listeners.SelectionListener;
 import ru.moralclaims.managers.BorderVisualizationManager;
@@ -11,8 +13,13 @@ import ru.moralclaims.managers.ConfigManager;
 import ru.moralclaims.managers.ConfirmationManager;
 import ru.moralclaims.managers.HologramManager;
 import ru.moralclaims.managers.NotificationManager;
+import ru.moralclaims.managers.LangManager;
 import ru.moralclaims.managers.SelectionManager;
 import ru.moralclaims.managers.TelegramManager;
+import ru.moralclaims.version.VersionManager;
+import ru.moralclaims.version.MaterialAdapter;
+import ru.moralclaims.version.ParticleAdapter;
+import ru.moralclaims.version.SoundAdapter;
 
 public class MoralClaimsPlugin extends JavaPlugin {
     
@@ -25,13 +32,35 @@ public class MoralClaimsPlugin extends JavaPlugin {
     private NotificationManager notificationManager;
     private BorderVisualizationManager borderVisualizationManager;
     private TelegramManager telegramManager;
+    private LangManager langManager;
+    
+    // Version adapters
+    private VersionManager versionManager;
+    private MaterialAdapter materialAdapter;
+    private ParticleAdapter particleAdapter;
+    private SoundAdapter soundAdapter;
     
     @Override
     public void onEnable() {
         instance = this;
         
+        // Initialize version system first
+        versionManager = VersionManager.getInstance();
+        materialAdapter = new MaterialAdapter();
+        particleAdapter = new ParticleAdapter();
+        soundAdapter = new SoundAdapter();
+        
+        getLogger().info("\n" +
+                "█▀▄▀█ █▀█ █▀█ ▄▀█ █░░\n" +
+                "█░▀░█ █▄█ █▀▄ █▀█ █▄▄\n" +
+                "\n" +
+                "█▀▀ █░░ ▄▀█ █ █▀▄▀█ █▀\n" +
+                "█▄▄ █▄▄ █▀█ █ █░▀░█ ▄█\n");
+        getLogger().info("Detected Minecraft version: " + versionManager.getVersionString());
+
         // Initialize managers
         configManager = new ConfigManager(this);
+        langManager = new LangManager(this);
         claimManager = new ClaimManager(this);
         hologramManager = new HologramManager(this);
         selectionManager = new SelectionManager(this);
@@ -84,13 +113,14 @@ public class MoralClaimsPlugin extends JavaPlugin {
     }
     
     private void registerCommands() {
-        ClaimCommand claimCommand = new ClaimCommand(this);
-        getCommand("claim").setExecutor(claimCommand);
-        getCommand("unclaim").setExecutor(claimCommand);
-        getCommand("claimlist").setExecutor(claimCommand);
-        getCommand("claimtrust").setExecutor(claimCommand);
-        getCommand("claimuntrust").setExecutor(claimCommand);
-        getCommand("clearselection").setExecutor(claimCommand);
+        FinalClaimCommand finalClaimCommand = new FinalClaimCommand(this);
+        getCommand("claim").setExecutor(finalClaimCommand);
+        getCommand("unclaim").setExecutor(finalClaimCommand);
+        getCommand("claimlist").setExecutor(finalClaimCommand);
+        getCommand("claimtrust").setExecutor(finalClaimCommand);
+        getCommand("claimuntrust").setExecutor(finalClaimCommand);
+        getCommand("clearselection").setExecutor(finalClaimCommand);
+        getCommand("claimtool").setExecutor(finalClaimCommand);
         
         getCommand("telegram").setExecutor(new TelegramCommand(this));
     }
@@ -98,6 +128,7 @@ public class MoralClaimsPlugin extends JavaPlugin {
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(new ClaimProtectionListener(this), this);
         getServer().getPluginManager().registerEvents(new SelectionListener(this), this);
+        getServer().getPluginManager().registerEvents(new AnvilListener(this), this);
     }
     
     public static MoralClaimsPlugin getInstance() {
@@ -134,5 +165,25 @@ public class MoralClaimsPlugin extends JavaPlugin {
     
     public TelegramManager getTelegramManager() {
         return telegramManager;
+    }
+
+    public LangManager getLangManager() {
+        return langManager;
+    }
+    
+    public VersionManager getVersionManager() {
+        return versionManager;
+    }
+    
+    public MaterialAdapter getMaterialAdapter() {
+        return materialAdapter;
+    }
+    
+    public ParticleAdapter getParticleAdapter() {
+        return particleAdapter;
+    }
+    
+    public SoundAdapter getSoundAdapter() {
+        return soundAdapter;
     }
 }

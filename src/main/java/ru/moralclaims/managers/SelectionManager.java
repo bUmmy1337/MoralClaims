@@ -6,6 +6,7 @@ import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import ru.moralclaims.MoralClaimsPlugin;
+import ru.moralclaims.version.ParticleAdapter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ public class SelectionManager {
     
     public void setFirstPosition(Player player, Location location) {
         firstPositions.put(player.getUniqueId(), location.clone());
-        player.sendMessage("§aПервая точка установлена: §f" + formatLocation(location));
+        player.sendMessage(plugin.getLangManager().getMessage("selection.first_point", formatLocation(location)));
         
         if (hasSecondPosition(player)) {
             showSelection(player);
@@ -32,7 +33,7 @@ public class SelectionManager {
     
     public void setSecondPosition(Player player, Location location) {
         secondPositions.put(player.getUniqueId(), location.clone());
-        player.sendMessage("§aВторая точка установлена: §f" + formatLocation(location));
+        player.sendMessage(plugin.getLangManager().getMessage("selection.second_point", formatLocation(location)));
         
         if (hasFirstPosition(player)) {
             showSelection(player);
@@ -64,7 +65,7 @@ public class SelectionManager {
         firstPositions.remove(playerId);
         secondPositions.remove(playerId);
         stopVisualization(player);
-        player.sendMessage("§7Выделение очищено");
+        player.sendMessage(plugin.getLangManager().getMessage("selection.cleared"));
     }
     
     public int getSelectionArea(Player player) {
@@ -92,10 +93,9 @@ public class SelectionManager {
         Location pos2 = getSecondPosition(player);
         
         int area = getSelectionArea(player);
-        player.sendMessage(String.format("§6Выделена область: §f%dx%d §6(площадь: %d блоков)", 
-                Math.abs(pos1.getBlockX() - pos2.getBlockX()) + 1,
-                Math.abs(pos1.getBlockZ() - pos2.getBlockZ()) + 1,
-                area));
+        int width = Math.abs(pos1.getBlockX() - pos2.getBlockX()) + 1;
+        int length = Math.abs(pos1.getBlockZ() - pos2.getBlockZ()) + 1;
+        player.sendMessage(plugin.getLangManager().getMessage("selection.area_selected", width, length, area));
         
         // Запускаем визуализацию
         BukkitRunnable task = new BukkitRunnable() {
@@ -115,6 +115,8 @@ public class SelectionManager {
     }
     
     private void visualizeSelection(Player player, Location pos1, Location pos2) {
+        ParticleAdapter particleAdapter = plugin.getParticleAdapter();
+        
         int minX = Math.min(pos1.getBlockX(), pos2.getBlockX());
         int maxX = Math.max(pos1.getBlockX(), pos2.getBlockX());
         int minZ = Math.min(pos1.getBlockZ(), pos2.getBlockZ());
@@ -125,14 +127,14 @@ public class SelectionManager {
         // Рисуем границы
         for (int x = minX; x <= maxX; x++) {
             // Верхняя и нижняя границы
-            player.spawnParticle(Particle.HAPPY_VILLAGER, x + 0.5, y, minZ + 0.5, 1, 0, 0, 0, 0);
-            player.spawnParticle(Particle.HAPPY_VILLAGER, x + 0.5, y, maxZ + 0.5, 1, 0, 0, 0, 0);
+            particleAdapter.spawnSelectionParticle(player, new Location(pos1.getWorld(), x + 0.5, y, minZ + 0.5));
+            particleAdapter.spawnSelectionParticle(player, new Location(pos1.getWorld(), x + 0.5, y, maxZ + 0.5));
         }
         
         for (int z = minZ; z <= maxZ; z++) {
             // Левая и правая границы
-            player.spawnParticle(Particle.HAPPY_VILLAGER, minX + 0.5, y, z + 0.5, 1, 0, 0, 0, 0);
-            player.spawnParticle(Particle.HAPPY_VILLAGER, maxX + 0.5, y, z + 0.5, 1, 0, 0, 0, 0);
+            particleAdapter.spawnSelectionParticle(player, new Location(pos1.getWorld(), minX + 0.5, y, z + 0.5));
+            particleAdapter.spawnSelectionParticle(player, new Location(pos1.getWorld(), maxX + 0.5, y, z + 0.5));
         }
     }
     

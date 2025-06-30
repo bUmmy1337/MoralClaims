@@ -10,10 +10,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import ru.moralclaims.MoralClaimsPlugin;
+import ru.moralclaims.version.MaterialAdapter;
 
 public class SelectionListener implements Listener {
     private final MoralClaimsPlugin plugin;
-    private static final String SELECTION_TOOL_NAME = "Инструмент привата";
     
     public SelectionListener(MoralClaimsPlugin plugin) {
         this.plugin = plugin;
@@ -45,7 +45,9 @@ public class SelectionListener implements Listener {
     }
     
     private boolean isSelectionTool(ItemStack item) {
-        if (item == null || item.getType() != Material.BRUSH) {
+        MaterialAdapter materialAdapter = plugin.getMaterialAdapter();
+        
+        if (item == null || item.getType() != materialAdapter.getSelectionTool()) {
             return false;
         }
         
@@ -54,6 +56,9 @@ public class SelectionListener implements Listener {
             return false;
         }
         
-        return SELECTION_TOOL_NAME.equals(meta.getDisplayName());
+        String toolNameKey = plugin.getConfig().getString("selection.tool_name_key", "anvil.tool_name");
+        String toolName = plugin.getLangManager().getMessage(toolNameKey);
+        return toolName.equals(meta.getDisplayName()) || 
+               ("§6" + toolName).equals(meta.getDisplayName());
     }
 }

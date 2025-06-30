@@ -77,7 +77,7 @@ public class NotificationManager {
         // Отправляем уведомления в Telegram
         if (config.areTelegramNotificationsEnabled()) {
             StringBuilder telegramMessage = new StringBuilder();
-            telegramMessage.append("⚠️ Активность в ваших приватах:\n\n");
+            telegramMessage.append(plugin.getLangManager().getMessage("notification.telegram.header"));
             
             for (NotificationGroup group : ownerNotifications.values()) {
                 telegramMessage.append(formatTelegramNotification(group)).append("\n");
@@ -102,10 +102,10 @@ public class NotificationManager {
                 group.getLocation().getBlockZ());
         
         if (group.getCount() == 1) {
-            return String.format("§c⚠ %s %s в твоем привате %s", 
+            return plugin.getLangManager().getMessage("notification.game.single", 
                     group.getIntruderName(), group.getAction(), locationStr);
         } else {
-            return String.format("§c⚠ %s %s в твоем прива��е %s §7(x%d)", 
+            return plugin.getLangManager().getMessage("notification.game.multiple", 
                     group.getIntruderName(), group.getAction(), locationStr, group.getCount());
         }
     }

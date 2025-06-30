@@ -74,7 +74,7 @@ public class ConfigManager {
     public String getRandomMessage(String type, String ownerName) {
         List<String> messages = getConfig().getStringList("messages." + type);
         if (messages.isEmpty()) {
-            return "§cЭто территория " + ownerName + "!";
+            return plugin.getLangManager().getMessage("protection.default_message", ownerName);
         }
         
         String message = messages.get(random.nextInt(messages.size()));
@@ -109,5 +109,10 @@ public class ConfigManager {
     
     public int getBorderVisualizationInterval() {
         return getConfig().getInt("border_visualization.particle_interval_ticks", 10);
+    }
+
+    // Locale setting
+    public String getLocale() {
+        return getConfig().getString("locale", "en_us");
     }
 }
