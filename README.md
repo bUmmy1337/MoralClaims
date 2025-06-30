@@ -10,8 +10,6 @@
 
 - **Моральные приваты**: Вместо обычных приватов показываются голограммы с сообщениями
 - **Выделение территории**: Используйте кисточку археолога для выделения прямоугольных областей
-- **Визуализация границ**: При нарушении красными частицами выделяется весь периметр привата на 10 секунд
-- **Умные частицы**: Эффект идет по блокам земли, не проходит сквозь стены
 - **Умные уведомления**: Группировка повторяющихся действий с счетчиками (x1, x2, x3...)
 - **Telegram уведомления**: Получайте уведомления о действиях в ваших приватах
 - **Настраиваемые сообщения**: Разные рандомные сообщения для разных действий
@@ -82,8 +80,6 @@ A plugin that implements a system of "moral" privates with holograms and Telegra
 
 - **Moral privates**: Instead of regular privates, holograms with messages are shown
 - **Highlighting the territory**: Use the archaeologist's brush to highlight rectangular areas
-- **Visualization of boundaries**: When violated, the entire perimeter of the private is highlighted with red particles for 10 seconds
-- **Smart particles**: The effect goes along blocks of earth, does not pass through walls
 - **Smart notifications**: Grouping recurring actions with counters (x1, x2, x3...)
 - **Telegram notifications**: Receive notifications about actions in your privates
 - **Customizable messages**: Different random messages for different actions
